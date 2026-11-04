@@ -1,9 +1,8 @@
-# Stable ASCII Video — Yellow Title Removed
+# Stable ASCII Video
 
 Converts video into a high-contrast monochrome ASCII animation while eliminating embedded yellow titles/captions from the original footage.
 
 ### Key Features:
-- **Yellow Text Removal**: Automatically detects and strips centered yellow subtitles/titles before ASCII conversion.
 - **Clean Output**: Does not introduce any watermark, title, or overlay.
 - **Flicker Reduction**: Employs temporal smoothing and deterministic character selection to minimize jitter.
 - **Refined Edges**: Restricts punctuation dots to subject contours on a solid black background.
