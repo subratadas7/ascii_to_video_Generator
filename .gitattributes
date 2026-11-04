@@ -1,0 +1,23 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Python and source files always LF
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.sh text eol=lf
+
+# Windows batch files always CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files
+*.mp4 binary
+*.mov binary
+*.avi binary
+*.ttf binary
+*.ttc binary
+*.otf binary
+*.png binary
+*.jpg binary

@@ -1,63 +1,74 @@
 # Stable ASCII Video
 
-Converts video into a high-contrast monochrome ASCII animation while eliminating embedded yellow titles/captions from the original footage.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-brightgreen.svg)](https://www.python.org/downloads/)
+[![Platform: macOS | Windows | Linux](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)]()
 
-### Key Features:
-- **Clean Output**: Does not introduce any watermark, title, or overlay.
-- **Flicker Reduction**: Employs temporal smoothing and deterministic character selection to minimize jitter.
-- **Refined Edges**: Restricts punctuation dots to subject contours on a solid black background.
+Convert videos into high-contrast monochrome ASCII animations with temporal stabilization to eliminate flicker. Features an intelligent filter to automatically remove central yellow title/text overlays from source footage without affecting surrounding content.
+
+Fully cross-platform: tested and compatible with **Windows**, **macOS**, and **Linux**.
 
 ---
 
-## Windows Setup
+## Key Features
 
-### 1. Prerequisites
-- [Python 3.10+](https://www.python.org/downloads/) installed.
-- **Important**: During Python installation, make sure to check **"Add python.exe to PATH"**.
+- **Cross-Platform Compatibility**: Automatically discovers system monospace fonts on Windows (`Consolas`, `Lucida Console`), macOS (`Menlo`, `SF Mono`), and Linux (`DejaVu Sans Mono`).
+- **H.264 (avc1) / MPEG-4 (mp4v) Codec Support**: Encodes with codecs supported natively by Windows Media Player, macOS QuickTime, and modern web browsers.
+- **Clean Output**: Does not introduce any watermark, title, or overlay.
+- **Smart Yellow Title Removal**: Automatically isolates and inpaints centered yellow subtitle/title text from frames before conversion. Can be toggled on/off via `--no-yellow-filter`.
+- **Flicker Reduction & Edge Control**: Uses deterministic character mapping, mild temporal blending, and sparse punctuation dots along object contours to eliminate jitter.
+- **Live Terminal Progress**: Clean single-line progress indicator showing frame count and percentage.
 
-### 2. Setup & Execution
+---
 
-Place your source video in this folder as `input.mp4`, then open **Command Prompt (`cmd`)** or **PowerShell** in the project folder:
+## Getting Started
 
-#### Using Command Prompt (`cmd`)
+### 1. Windows Setup
+
+#### Prerequisites:
+- Download & install [Python 3.10+](https://www.python.org/downloads/).
+- **Important**: In the installer, check the box: **"Add python.exe to PATH"**.
+
+#### Running in Command Prompt (`cmd`):
 ```cmd
-:: Create a virtual environment
+:: 1. Navigate to the project directory
+cd Ascii_Generator
+
+:: 2. Create virtual environment
 python -m venv .venv
 
-:: Activate the environment
+:: 3. Activate virtual environment
 .venv\Scripts\activate
 
-:: Upgrade pip and install requirements
+:: 4. Upgrade pip and install dependencies
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
-:: Convert video
+:: 5. Run conversion (uses input.mp4 by default)
 python main.py input.mp4
 
-:: Open the result
+:: 6. Open the generated ASCII video
 start ascii_no_yellow_stable.mp4
 ```
 
-#### Using PowerShell
+#### Running in PowerShell:
 ```powershell
-# Create a virtual environment
+# 1. Create and activate virtual environment
 python -m venv .venv
-
-# Activate the environment
 .venv\Scripts\Activate.ps1
 
-# Upgrade pip and install requirements
+# 2. Install dependencies
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
-# Convert video
+# 3. Run conversion
 python main.py input.mp4
 
-# Open the result
+# 4. Open the result
 start ascii_no_yellow_stable.mp4
 ```
 
-> **Tip for PowerShell:** If you encounter `running scripts is disabled on this system`, allow script execution for the current session:
+> **PowerShell execution policy note:** If you see `running scripts is disabled on this system`, enable script execution for your session by running:
 > ```powershell
 > Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 > ```
@@ -65,45 +76,88 @@ start ascii_no_yellow_stable.mp4
 
 ---
 
-## macOS & Linux Setup
+### 2. macOS & Linux Setup
 
-Place your video in this folder as `input.mp4`, then run:
+Place your video in the project directory as `input.mp4` (or specify any file path):
 
 ```bash
-# Create a virtual environment
+# 1. Create virtual environment
 python3 -m venv .venv
 
-# Activate the environment
+# 2. Activate virtual environment
 source .venv/bin/activate
 
-# Upgrade pip and install requirements
+# 3. Install dependencies
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
-# Convert video
+# 4. Run conversion
 python main.py input.mp4
 
-# Open the result (macOS)
+# 5. Play video
+# macOS:
 open ascii_no_yellow_stable.mp4
-# On Linux:
+# Linux:
 # xdg-open ascii_no_yellow_stable.mp4
 ```
 
 ---
 
-## Optional Parameters
-
-You can fine-tune smoothing and edge density:
+## CLI Options & Customization
 
 ```bash
-python main.py input.mp4 --smoothing 0.30 --edge-dots 0.05
+python main.py [input] [options]
 ```
 
-- `--smoothing`: Temporal blend factor between frames to reduce flicker (default: `0.25`).
-- `--edge-dots`: Density of punctuation dots along high-contrast boundaries (default: `0.04`).
+| Argument | Type | Default | Description |
+| :--- | :---: | :---: | :--- |
+| `input` | Positional | `input.mp4` | Path to the source video file (MP4, MOV, AVI, etc.) |
+| `-o`, `--output` | String | `ascii_no_yellow_stable.mp4` | Destination output file path |
+| `--width` | Integer | `120` | ASCII character grid columns (higher = more detail) |
+| `--fps` | Float | `10.0` | Framerate of the rendered video |
+| `--smoothing` | Float | `0.22` | Temporal blend factor (0.0 to 0.45) to reduce flicker |
+| `--edge-dots` | Float | `0.07` | Density of sparse edge punctuation (0.0 to 0.30) |
+| `--no-yellow-filter` | Flag | `False` | Disable the central yellow subtitle/title removal filter |
+| `--font` | String | `None` | Path to a custom `.ttf` or `.otf` font file |
+
+### Examples:
+
+1. **Convert standard video without yellow subtitle filtering:**
+   ```bash
+   python main.py my_video.mp4 --no-yellow-filter -o output.mp4
+   ```
+
+2. **Higher resolution ASCII output at 15 FPS:**
+   ```bash
+   python main.py input.mp4 --width 160 --fps 15.0
+   ```
+
+3. **Maximum stability / smoothing for high-noise footage:**
+   ```bash
+   python main.py input.mp4 --smoothing 0.35 --edge-dots 0.04
+   ```
+
+4. **Use a custom monospace font:**
+   ```bash
+   python main.py input.mp4 --font /path/to/my-font.ttf
+   ```
 
 ---
 
-## Notes
-- Output is generated as `ascii_no_yellow_stable.mp4`.
-- The yellow removal specifically targets yellow hue pixels within the central title region so that other objects across the frame remain unaffected.
+## Project Structure
+
+```
+Ascii_Generator/
+├── main.py              # Core ASCII rendering engine & CLI
+├── requirements.txt     # Python dependencies (OpenCV, Pillow, NumPy)
+├── .gitignore           # Git ignore rules for virtual environments & media
+├── .gitattributes       # Cross-platform LF/CRLF line ending normalization
+├── LICENSE              # MIT License
+└── README.md            # Documentation & setup guide
+```
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE) — see the LICENSE file for details.
