@@ -12,16 +12,37 @@ Fully cross-platform: tested and compatible with **Windows**, **macOS**, and **L
 
 ## Key Features
 
-- **Cross-Platform Compatibility**: Automatically discovers system monospace fonts on Windows (`Consolas`, `Lucida Console`), macOS (`Menlo`, `SF Mono`), and Linux (`DejaVu Sans Mono`).
+- **One-Click Runners**: Pre-configured `run_windows.bat` and `run_mac.sh` handle virtualenv setup, dependency installation, and execution automatically.
+- **VS Code Ready**: Includes `.vscode` workspace configuration with debug and run profiles.
+- **Cross-Platform Fonts**: Automatically discovers system monospace fonts on Windows (`Consolas`, `Lucida Console`), macOS (`Menlo`, `SF Mono`), and Linux (`DejaVu Sans Mono`).
 - **H.264 (avc1) / MPEG-4 (mp4v) Codec Support**: Encodes with codecs supported natively by Windows Media Player, macOS QuickTime, and modern web browsers.
-- **Clean Output**: Does not introduce any watermark, title, or overlay.
 - **Smart Yellow Title Removal**: Automatically isolates and inpaints centered yellow subtitle/title text from frames before conversion. Can be toggled on/off via `--no-yellow-filter`.
 - **Flicker Reduction & Edge Control**: Uses deterministic character mapping, mild temporal blending, and sparse punctuation dots along object contours to eliminate jitter.
 - **Live Terminal Progress**: Clean single-line progress indicator showing frame count and percentage.
 
 ---
 
-## Getting Started
+## Quick Start (Automated Scripts)
+
+Place your video as `input.mp4` in the project folder.
+
+### On Windows (One-Click)
+Double-click `run_windows.bat` or run in Command Prompt / PowerShell:
+```cmd
+run_windows.bat
+```
+*(Automatically creates `.venv`, installs requirements, and runs conversion).*
+
+### On macOS & Linux (One-Click)
+Open Terminal and run:
+```bash
+chmod +x run_mac.sh
+./run_mac.sh
+```
+
+---
+
+## Manual Setup
 
 ### 1. Windows Setup
 
@@ -31,23 +52,20 @@ Fully cross-platform: tested and compatible with **Windows**, **macOS**, and **L
 
 #### Running in Command Prompt (`cmd`):
 ```cmd
-:: 1. Navigate to the project directory
-cd Ascii_Generator
-
-:: 2. Create virtual environment
+:: 1. Create virtual environment
 python -m venv .venv
 
-:: 3. Activate virtual environment
+:: 2. Activate virtual environment
 .venv\Scripts\activate
 
-:: 4. Upgrade pip and install dependencies
+:: 3. Upgrade pip and install dependencies
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
-:: 5. Run conversion (uses input.mp4 by default)
+:: 4. Run conversion (uses input.mp4 by default)
 python main.py input.mp4
 
-:: 6. Open the generated ASCII video
+:: 5. Open the generated ASCII video
 start ascii_no_yellow_stable.mp4
 ```
 
@@ -78,8 +96,6 @@ start ascii_no_yellow_stable.mp4
 
 ### 2. macOS & Linux Setup
 
-Place your video in the project directory as `input.mp4` (or specify any file path):
-
 ```bash
 # 1. Create virtual environment
 python3 -m venv .venv
@@ -100,6 +116,17 @@ open ascii_no_yellow_stable.mp4
 # Linux:
 # xdg-open ascii_no_yellow_stable.mp4
 ```
+
+---
+
+## VS Code Setup
+
+This workspace includes ready-to-use VS Code configurations in `.vscode/`:
+- **`settings.json`**: Automatically points Python interpreter to `${workspaceFolder}/.venv`.
+- **`launch.json`**: Press **F5** in VS Code to run:
+  - *Python: Convert Default (input.mp4)*
+  - *Python: Convert High Quality (160 cols, 15 FPS)*
+- **`extensions.json`**: Recommended Python extensions.
 
 ---
 
@@ -147,13 +174,19 @@ python main.py [input] [options]
 ## Project Structure
 
 ```
-Ascii_Generator/
+Ascii_to_video_Generator/
+├── .vscode/             # VS Code workspace settings, launch & extensions
+│   ├── extensions.json
+│   ├── launch.json
+│   └── settings.json
+├── .gitattributes       # Cross-platform LF/CRLF line ending normalization
+├── .gitignore           # Git ignore rules for virtual environments & media
+├── LICENSE              # MIT License
+├── README.md            # Documentation & setup guide
 ├── main.py              # Core ASCII rendering engine & CLI
 ├── requirements.txt     # Python dependencies (OpenCV, Pillow, NumPy)
-├── .gitignore           # Git ignore rules for virtual environments & media
-├── .gitattributes       # Cross-platform LF/CRLF line ending normalization
-├── LICENSE              # MIT License
-└── README.md            # Documentation & setup guide
+├── run_mac.sh           # One-click runner for macOS & Linux
+└── run_windows.bat      # One-click runner for Windows
 ```
 
 ---
