@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-brightgreen.svg)](https://www.python.org/downloads/)
 [![Platform: macOS | Windows | Linux](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)]()
+![Static Badge](https://img.shields.io/badge/github-repo-blue%3Flogo%3Dgithub)
 
 Convert videos into high-contrast monochrome ASCII animations with temporal stabilization to eliminate flicker. Features an intelligent filter to automatically remove central yellow title/text overlays from source footage without affecting surrounding content.
 
