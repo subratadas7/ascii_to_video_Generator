@@ -35,11 +35,20 @@ CELL_H = 16
 
 
 def load_font(size=13):
-    for path in (
+    font_candidates = (
+        # macOS
         "/System/Library/Fonts/Menlo.ttc",
         "/System/Library/Fonts/Supplemental/Courier New.ttf",
-    ):
-        if os.path.exists(path):
+        # Windows
+        "consola.ttf",
+        "cour.ttf",
+        "C:/Windows/Fonts/consola.ttf",
+        "C:/Windows/Fonts/cour.ttf",
+        # Linux
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+    )
+    for path in font_candidates:
+        if os.path.exists(path) or not os.path.isabs(path):
             try:
                 return ImageFont.truetype(path, size)
             except OSError:
