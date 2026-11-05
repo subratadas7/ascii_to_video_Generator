@@ -1,9 +1,19 @@
 # Stable ASCII Video
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Python: 3.10+](https://img.shields.io/badge/Python-3.10+-brightgreen.svg)](https://www.python.org/downloads/)
-[![Platform: macOS | Windows | Linux](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg)]()
-![Static Badge](https://img.shields.io/badge/github-repo-blue%3Flogo%3Dgithub)
+<p align="center">
+  <img src="assets/logo.png" alt="ASCII Video Logo" width="850">
+</p>
+
+<p align="center">
+  <strong>Convert videos into clean ASCII art with temporal stabilization and subtitle removal!</strong>
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/Python-3.10+-brightgreen.svg" alt="Python: 3.10+"></a>
+  <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg" alt="Platform: macOS | Windows | Linux">
+  <a href="https://github.com/subratadas7/Ascii_to_video_Generator"><img src="https://img.shields.io/badge/github-repo-blue?logo=github" alt="GitHub Repo"></a>
+</p>
 
 Convert videos into high-contrast monochrome ASCII animations with temporal stabilization to eliminate flicker. Features an intelligent filter to automatically remove central yellow title/text overlays from source footage without affecting surrounding content.
 
@@ -176,6 +186,8 @@ python main.py [input] [options]
 
 ```
 Ascii_to_video_Generator/
+├── assets/              # Project banner and logos
+│   └── logo.png
 ├── .vscode/             # VS Code workspace settings, launch & extensions
 │   ├── extensions.json
 │   ├── launch.json
