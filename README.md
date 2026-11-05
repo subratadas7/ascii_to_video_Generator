@@ -1,14 +1,6 @@
 # Stable ASCII Video
 
 <p align="center">
-  <img src="assets/logo.png" alt="ASCII Video Logo" width="850">
-</p>
-
-<p align="center">
-  <strong>Convert videos into clean ASCII art with temporal stabilization and subtitle removal!</strong>
-</p>
-
-<p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/Python-3.10+-brightgreen.svg" alt="Python: 3.10+"></a>
   <img src="https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey.svg" alt="Platform: macOS | Windows | Linux">
